@@ -23,6 +23,9 @@ button {
     margin: auto;
     background-color: #f1f0f7;
     border-radius: 20px;
+    -webkit-box-shadow: 17px 18px 24px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 17px 18px 24px -1px rgba(0,0,0,0.75);
+    box-shadow: 17px 18px 24px -1px rgba(0,0,0,0.75);
 }
 
 .header {
