@@ -7,6 +7,7 @@
     <title>Find Bug</title>
     <script src="https://kit.fontawesome.com/149fd05c29.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
 </head>
 <body>
     <div class="background">
@@ -14,17 +15,25 @@
             <button class="play">
                 <i class="fa-solid fa-play"></i>
             </button>
-            <span class="timer">00:00</span>
-            <span class="counter">10</span>
-        </section>
-        <section class="gameZone">
-            <div class="info">
-                <button class="reload">
-                    <i class="fa-solid fa-arrow-rotate-right"></i>
-                </button>
-                <sapn class="info__message">YOU LOST</sapn>
+            <div class="timer">
+                <span class="timer__number">00:00</span>
+            </div>
+            <div class="counter">
+                <span class="counter__number">10</span>
             </div>
         </section>
+        <section class="gameZone">
+            <!-- <img class="bug1" src="img/bug.png" alt="bug image">
+            <img class="bug2" src="img/bug.png" alt="bug image">
+            <img class="carrot1" src="img/carrot.png" alt="carrot image">
+            <img class="carrot2" src="img/carrot.png" alt="carrot image"> -->
+        </section>
+        <div class="info">
+            <button class="reload">
+                <i class="fa-solid fa-arrow-rotate-right"></i>
+            </button>
+            <sapn class="info__message">YOU LOST</sapn>
+        </div>
     </div>
 </body>
 </html>
