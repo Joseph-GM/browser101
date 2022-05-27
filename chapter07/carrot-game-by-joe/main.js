@@ -30,12 +30,18 @@ function renderBugsAndCarrots() {
    
     for (let i = 0; i < 10; i++) {
 
-        const xBug = getRandomArbitrary(0, gameZoneWidth);
-        const yBug = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight));
-        const xCarrot = getRandomArbitrary(0, gameZoneWidth);
-        const yCarrot = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight));
-
         const bugElement = document.createElement('img');
+        const carrotElement = document.createElement('img');
+        const bugWidth = bugElement.getBoundingClientRect().width;
+        const bugHeight = bugElement.getBoundingClientRect().height;
+        const carrotWidth = carrotElement.getBoundingClientRect().width;
+        const carrotHeight = carrotElement.getBoundingClientRect().height;
+
+        const xBug = getRandomArbitrary(0, gameZoneWidth-bugWidth);
+        const yBug = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight-bugHeight));
+        const xCarrot = getRandomArbitrary(0, gameZoneWidth-carrotWidth);
+        const yCarrot = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight-carrotHeight));
+
         bugElement.setAttribute("class", `bug${i}`);
         bugElement.setAttribute("src", "img/bug.png");
         bugElement.setAttribute("alt", "bug image"); 
@@ -46,7 +52,7 @@ function renderBugsAndCarrots() {
         gameZone.appendChild(bugElement);
         console.log(`bug${i} cordinate(${xBug}%, ${yBug}%)`)
 
-        const carrotElement = document.createElement('img');
+        
         carrotElement.setAttribute("class", `carrot${i}`);
         carrotElement.setAttribute("src", "img/carrot.png");
         carrotElement.setAttribute("alt", "carrot image"); 
