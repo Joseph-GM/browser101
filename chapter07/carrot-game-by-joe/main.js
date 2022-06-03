@@ -1,10 +1,12 @@
 let isStart = false;
 let bugImgElementArray = [];
 let carrotImgElemetnArray = [];
+let timeCount = 10;
 
 const playBtn = document.querySelector('.play');
 const gameZone = document.querySelector('.gameZone');
 const infoZone = document.querySelector('.infoZone');
+const timerNumber = document.querySelector('.timer__number');
 
 playBtn.addEventListener('click', () => {
     console.log("paly Btn clicked;")
@@ -16,7 +18,18 @@ playBtn.addEventListener('click', () => {
         isStart = true;
         renderBugsAndCarrots();
     }
+    countDown();
 });
+
+function countDown() {
+    let interval = setInterval(() => {
+        timeCount -= 1;
+        timerNumber.innerHTML = `00:0${timeCount}`;
+        if (timeCount === 0) {
+            clearInterval(interval);
+        }
+    },1000);
+}
 
 function renderBugsAndCarrots() {
     console.log('renderBugsAndCarrots() called')
