@@ -10,28 +10,45 @@ const timerNumber = document.querySelector('.timer__number');
 
 playBtn.addEventListener('click', () => {
     console.log("paly Btn clicked;")
+
     if (isStart) {
         playBtn.innerHTML = `<i class="fa-solid fa-stop"></i>`
         isStart = false;
     } else {
         playBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
         isStart = true;
+        removeImages();
         renderBugsAndCarrots();
+        countDown();
     }
-    countDown();
+    // countDown();
 });
+
+function removeImages() {
+    while (gameZone.hasChildNodes()) {
+        gameZone.removeChild(gameZone.firstChild);
+    }
+}
 
 function countDown() {
     let interval = setInterval(() => {
         timeCount -= 1;
         timerNumber.innerHTML = `00:0${timeCount}`;
+        if (!isStart) {
+            clearInterval(interval);
+        }
         if (timeCount === 0) {
             clearInterval(interval);
+            isStart = false;
+            playBtn.innerHTML = `<i class="fa-solid fa-stop"></i>`
+            // playBtn.style.display = 'none'
         }
     },1000);
 }
 
 function renderBugsAndCarrots() {
+    timeCount = 10;
+    timerNumber.innerHTML = `00:10`;
     console.log('renderBugsAndCarrots() called')
     const gameZoneShape = gameZone.getBoundingClientRect()
     const gameZoneWidth = gameZoneShape.width;
