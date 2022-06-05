@@ -50,10 +50,10 @@ function renderBugsAndCarrots() {
         const carrotWidth = carrotElement.getBoundingClientRect().width;
         const carrotHeight = carrotElement.getBoundingClientRect().height;
 
-        const xBug = getRandomArbitrary(0, gameZoneWidth-bugWidth);
-        const yBug = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight-bugHeight));
-        const xCarrot = getRandomArbitrary(0, gameZoneWidth-carrotWidth);
-        const yCarrot = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight-carrotHeight));
+        const xBug = getRandomArbitrary(0, gameZoneWidth-bugWidth*3);
+        const yBug = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight-bugHeight*3));
+        const xCarrot = getRandomArbitrary(0, gameZoneWidth-carrotWidth*3);
+        const yCarrot = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight-carrotHeight*3));
 
         bugElement.setAttribute("class", `bug${i}`);
         bugElement.setAttribute("src", "img/bug.png");
