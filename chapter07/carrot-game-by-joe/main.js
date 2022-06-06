@@ -2,11 +2,23 @@ let isStart = false;
 let bugImgElementArray = [];
 let carrotImgElemetnArray = [];
 let timeCount = 10;
+let carrotCount = 10;
 
 const playBtn = document.querySelector('.play');
 const gameZone = document.querySelector('.gameZone');
 const infoZone = document.querySelector('.infoZone');
 const timerNumber = document.querySelector('.timer__number');
+
+gameZone.addEventListener('click', (event) => {
+    // console.log(event.dataset);
+    if (event.target.dataset.imageName === "bug") {
+        console.log("bug clicked")
+    } else if (event.target.dataset.imageName === "carrot") {
+        console.log("carrot clicked")
+        carrotCount -= 1;
+    }
+    
+})
 
 playBtn.addEventListener('click', () => {
     console.log("paly Btn clicked;")
@@ -72,9 +84,10 @@ function renderBugsAndCarrots() {
         const xCarrot = getRandomArbitrary(0, gameZoneWidth-carrotWidth*3);
         const yCarrot = getRandomArbitrary(infoZoneHeight, (infoZoneHeight+gameZoneHeight-carrotHeight*3));
 
-        bugElement.setAttribute("class", `bug${i}`);
+        bugElement.setAttribute("class", `bug bug${i}`);
         bugElement.setAttribute("src", "img/bug.png");
         bugElement.setAttribute("alt", "bug image"); 
+        bugElement.setAttribute("data-image-name", "bug");
         bugElement.style.position = 'absolute';
         bugElement.style.top = `${yBug}px`;
         bugElement.style.left = `${xBug}px`;
@@ -86,6 +99,7 @@ function renderBugsAndCarrots() {
         carrotElement.setAttribute("class", `carrot${i}`);
         carrotElement.setAttribute("src", "img/carrot.png");
         carrotElement.setAttribute("alt", "carrot image"); 
+        carrotElement.setAttribute("data-image-name", "carrot");
         carrotElement.style.position = 'absolute';
         carrotElement.style.top = `${yCarrot}px`;
         carrotElement.style.left = `${xCarrot}px`;
