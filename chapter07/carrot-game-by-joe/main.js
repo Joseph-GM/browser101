@@ -8,26 +8,54 @@ const playBtn = document.querySelector('.play');
 const gameZone = document.querySelector('.gameZone');
 const infoZone = document.querySelector('.infoZone');
 const timerNumber = document.querySelector('.timer__number');
+const info = document.querySelector('.info');
+const infoMessage = document.querySelector('.info__message');
+const counteNumber = document.querySelector('.counter__number');
+const reloadBtn = document.querySelector('.reload');
+
+reloadBtn.addEventListener('click', () => {
+    removeImages();
+    info.style.display = 'none';
+    playBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+})
 
 gameZone.addEventListener('click', (event) => {
     // console.log(event.dataset);
+    if (isStart == false) {
+        return;
+    }
     if (event.target.dataset.imageName === "bug") {
         console.log("bug clicked")
+        isStart = false;
+        infoMessage.innerHTML = `You Lost`;
+        info.style.display = 'flex';
     } else if (event.target.dataset.imageName === "carrot") {
-        console.log("carrot clicked")
         carrotCount -= 1;
+        console.log(`carrot count : ${carrotCount}`);
+        className = event.target.className;
+        const selectedCarrot = document.querySelector(`.${className}`);
+        selectedCarrot.style.display = 'none';
+        counteNumber.innerHTML = `${carrotCount}`;
     }
+
+    if (timeCount > 0 && carrotCount === 0) {
+        isStart = false;
+        infoMessage.innerHTML = `You Win`;
+        info.style.display = 'flex';
+    }
+
+
     
 })
 
 playBtn.addEventListener('click', () => {
     console.log("paly Btn clicked;")
 
-    if (isStart) {
-        playBtn.innerHTML = `<i class="fa-solid fa-stop"></i>`
+    if (isStart == true) {
+        playBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
         isStart = false;
     } else {
-        playBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+        playBtn.innerHTML = `<i class="fa-solid fa-stop"></i>`
         isStart = true;
         removeImages();
         renderBugsAndCarrots();
@@ -49,18 +77,21 @@ function countDown() {
         if (!isStart) {
             clearInterval(interval);
         }
-        if (timeCount === 0) {
+        if (timeCount === 0 && carrotCount > 0) {
             clearInterval(interval);
             isStart = false;
             playBtn.innerHTML = `<i class="fa-solid fa-stop"></i>`
-            // playBtn.style.display = 'none'
+            infoMessage.innerHTML = `You Lost`;
+            info.style.display = 'flex';
         }
     },1000);
 }
 
 function renderBugsAndCarrots() {
     timeCount = 10;
-    timerNumber.innerHTML = `00:10`;
+    carrotCount = 10;
+    timerNumber.innerHTML = `00:${timeCount}`;
+    counteNumber.innerHTML = `${carrotCount}`
     console.log('renderBugsAndCarrots() called')
     const gameZoneShape = gameZone.getBoundingClientRect()
     const gameZoneWidth = gameZoneShape.width;

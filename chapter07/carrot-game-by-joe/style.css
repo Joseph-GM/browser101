@@ -69,7 +69,7 @@
 
 
 .info {
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 300px;
     height: 150px;
@@ -94,3 +94,5 @@
     font-size: 30px;
     color: white;
 }
+
+
