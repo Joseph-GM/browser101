@@ -26,10 +26,12 @@ gameZone.addEventListener('click', (event) => {
     }
     if (event.target.dataset.imageName === "bug") {
         console.log("bug clicked")
+        makeSound('bug_pull.mp3');
         isStart = false;
         infoMessage.innerHTML = `You Lost`;
         info.style.display = 'flex';
     } else if (event.target.dataset.imageName === "carrot") {
+        makeSound('carrot_pull.mp3');
         carrotCount -= 1;
         console.log(`carrot count : ${carrotCount}`);
         className = event.target.className;
@@ -144,4 +146,9 @@ function renderBugsAndCarrots() {
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
+
+function makeSound(soundFile) {
+    let audio = new Audio(`sound/${soundFile}`);
+    audio.play();
+}
 
