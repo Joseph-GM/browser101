@@ -19,6 +19,8 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+field.addEventListener('click', onFieldClick);
+
 gameBtn.addEventListener('click', ()=> {
     console.log('log')
     if(started) {
@@ -90,6 +92,19 @@ function initGame() {
     gameScore.innerHTML = CARROT_COUNT;
     addItem('carrot', CARROT_COUNT, 'img/carrot.png');
     addItem('bug', BUG_COUNT, 'img/bug.png');
+}
+
+function onFieldClick(event) {
+    if (!started) {
+        return;
+    }
+    const target = event.target;
+    if(target.matches('.carrot')) {
+        //Carrot!!
+        target.remove();
+    } else if(target.matches('.bug')) {
+        //Bug!!
+    }
 }
 
 function addItem(className, count, imgPath) {
