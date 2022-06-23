@@ -1,4 +1,7 @@
 'use strict';
+
+import PopUp from './popup.js';
+
 const CARROT_SIZE = 80;
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
@@ -10,14 +13,17 @@ const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector('.game__button');
 const gameTimer = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
-const popUp = document.querySelector('.pop-up');
-const popUpText = document.querySelector('.pop-up__message');
-const popUpRefresh = document.querySelector('.pop-up__refresh');
+
 
 
 let started = false;
 let score = 0;
 let timer = undefined;
+
+const gameFinishBanner = new PopUp();
+gameFinishBanner.setClickListener(() => {
+    startGame();
+})
 
 const carrotSound = new Audio('./sound/carrot_pull.mp3');
 const alertSound = new Audio('./sound/alert.wav');
@@ -36,16 +42,16 @@ gameBtn.addEventListener('click', ()=> {
     }
 });
 
-popUpRefresh.addEventListener('click', () => {
-    startGame();
-    hidePopup();
-})
+// popUpRefresh.addEventListener('click', () => {
+//     startGame();
+// })
 
 function stopGame() {
     started = false;
     stopGameTimer();
     hideGamebutton();
-    showPopUpWithText('REPLAY');
+    gameFinishBanner.showWithText('REPLAY?');
+    // showPopUpWithText('REPLAY');
     playSound(alertSound);
     stopSound(bgSound);
     
@@ -70,7 +76,7 @@ function finishGame(win){
         playSound(bugSound)
     }
     stopGameTimer();
-    showPopUpWithText(win? 'YOU WON' : 'YOU LOST');
+    gameFinishBanner.showWithText(win? 'YOU WON' : 'YOU LOST');
     stopSound(bgSound);
 }
 
@@ -114,14 +120,14 @@ function hideGamebutton() {
     gameBtn.style.visibility = 'hidden';
 }
 
-function showPopUpWithText(text) {
-    popUpText.innerText = text;
-    popUp.classList.remove('pop-up--hide');
-}
+// function showPopUpWithText(text) {
+//     popUpText.innerText = text;
+//     popUp.classList.remove('pop-up--hide');
+// }
 
-function hidePopup() {
-    popUp.classList.add('pop-up--hide');
-}
+// function hidePopup() {
+//     popUp.classList.add('pop-up--hide');
+// }
 
 function initGame() {
     // Add bugs and carrots in field
