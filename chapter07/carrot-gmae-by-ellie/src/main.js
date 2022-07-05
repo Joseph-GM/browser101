@@ -1,8 +1,9 @@
 'use strict';
 
 import PopUp from './popup.js';
+import Field from './field.js';
 
-const CARROT_SIZE = 80;
+
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
 const GAME_DURATION_SEC = 5;
@@ -22,13 +23,36 @@ gameFinishBanner.setClickListener(() => {
     startGame();
 })
 
+const gameField = new Field(CARROT_COUNT, BUG_COUNT);
+gameField.setClickListener((item) => onItemClick);
+function onItemClick(item) {
+    if (!started) {
+        return;
+    }
+    // const target = event.target;
+    if(item === 'carrot') {
+        //Carrot!!
+        // target.remove();
+        score++;
+        // playSound(carrotSound);
+        updateScoreBoard();
+        if (score === CARROT_COUNT) {
+            finishGame(true);
+        }
+    } else if(item === 'bug') {
+        //Bug!!
+        finishGame(false);
+    }
+}
+
+
 const carrotSound = new Audio('./sound/carrot_pull.mp3');
 const alertSound = new Audio('./sound/alert.wav');
 const bgSound = new Audio('./sound/bg.mp3');
 const bugSound = new Audio('./sound/bug_pull.mp3');
 const winSound = new Audio('./sound/game_win.mp3');
 
-field.addEventListener('click', onFieldClick);
+// field.addEventListener('click', onFieldClick);
 
 gameBtn.addEventListener('click', ()=> {
     console.log('log')
@@ -133,27 +157,9 @@ function initGame() {
     score = 0;
     // addItem('carrot', CARROT_COUNT, 'img/carrot.png');
     // addItem('bug', BUG_COUNT, 'img/bug.png');
+    gameField.init();
 }
 
-function onFieldClick(event) {
-    if (!started) {
-        return;
-    }
-    const target = event.target;
-    if(target.matches('.carrot')) {
-        //Carrot!!
-        target.remove();
-        score++;
-        playSound(carrotSound);
-        updateScoreBoard();
-        if (score === CARROT_COUNT) {
-            finishGame(true);
-        }
-    } else if(target.matches('.bug')) {
-        //Bug!!
-        finishGame(false);
-    }
-}
 
 function playSound(sound) {
     sound.currentTime = 0;
@@ -168,7 +174,5 @@ function updateScoreBoard() {
     gameScore.innerText = CARROT_COUNT - score;
 }
 
-function randomNumber(min, max) {
-    return Math.random() * (max - min) + min;
-}
+
 
