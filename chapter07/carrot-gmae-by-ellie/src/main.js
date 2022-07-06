@@ -98,7 +98,8 @@ function finishGame(win){
     }
     stopGameTimer();
     gameFinishBanner.showWithText(win? 'YOU WON' : 'YOU LOST');
-    stopSound(bgSound);
+    // stopSound(bgSound);
+    sound.stopBackground();
 }
 
 function stopGameTimer() {
