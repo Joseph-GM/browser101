@@ -2,7 +2,7 @@
 
 import PopUp from './popup.js';
 import Field from './field.js';
-
+import * as sound from './sound.js';
 
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
@@ -46,11 +46,7 @@ function onItemClick(item) {
 }
 
 
-const carrotSound = new Audio('./sound/carrot_pull.mp3');
-const alertSound = new Audio('./sound/alert.wav');
-const bgSound = new Audio('./sound/bg.mp3');
-const bugSound = new Audio('./sound/bug_pull.mp3');
-const winSound = new Audio('./sound/game_win.mp3');
+
 
 // field.addEventListener('click', onFieldClick);
 
@@ -73,8 +69,10 @@ function stopGame() {
     hideGamebutton();
     gameFinishBanner.showWithText('REPLAY?');
     // showPopUpWithText('REPLAY');
-    playSound(alertSound);
-    stopSound(bgSound);
+    // playSound(alertSound);
+    // stopSound(bgSound);
+    sound.playAlert();
+    sound.stopBackground();
     
 }
 
@@ -84,7 +82,7 @@ function startGame() {
     showStopButton();
     showTimerAndScore();
     startGameTimer();
-    playSound(bgSound);
+    sound.playBackground();
     
 }
 
@@ -92,9 +90,11 @@ function finishGame(win){
     started = false;
     hideGamebutton();
     if(win) {
-        playSound(winSound);
+        // playSound(winSound);
+        sound.playWin();
     } else {
-        playSound(bugSound)
+        // playSound(bugSound);
+        sound.playBug();
     }
     stopGameTimer();
     gameFinishBanner.showWithText(win? 'YOU WON' : 'YOU LOST');
@@ -159,16 +159,6 @@ function initGame() {
     // addItem('bug', BUG_COUNT, 'img/bug.png');
     gameField.init();
 }
-
-
-function playSound(sound) {
-    sound.currentTime = 0;
-    sound.play();
-}
-function stopSound(sound) {
-    sound.pause();
-}
-
 
 function updateScoreBoard() {
     gameScore.innerText = CARROT_COUNT - score;
