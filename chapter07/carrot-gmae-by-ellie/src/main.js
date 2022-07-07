@@ -24,15 +24,18 @@ gameFinishBanner.setClickListener(() => {
 })
 
 const gameField = new Field(CARROT_COUNT, BUG_COUNT);
-gameField.setClickListener((item) => onItemClick);
+gameField.setClickListener(onItemClick);
 function onItemClick(item) {
+    console.log(`main.js onItemClick called, item = ${item}`)
     if (!started) {
         return;
     }
     // const target = event.target;
+    console.log(`main.js onItemClick called, item = ${item}`)
     if(item === 'carrot') {
         //Carrot!!
         // target.remove();
+        console.log(`main.js onItemClick called, item = ${item}`)
         score++;
         // playSound(carrotSound);
         updateScoreBoard();
@@ -41,6 +44,7 @@ function onItemClick(item) {
         }
     } else if(item === 'bug') {
         //Bug!!
+        console.log(`main.js onItemClick called, item = ${item}`)
         finishGame(false);
     }
 }

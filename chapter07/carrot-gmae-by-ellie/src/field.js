@@ -44,16 +44,18 @@ export default class Field {
         }
     }
 
-    onClick(event) {
+    onClick = event => {
         const target = event.target;
         if(target.matches('.carrot')) {
             //Carrot!!
+            console.log(`field.js onClick called CARROT!!!!`)
             target.remove();
             // playSound(carrotSound);
             sound.playCarrot();
             this.onItemClick && this.onItemClick('carrot');
         } else if(target.matches('.bug')) {
             //Bug!!
+            console.log(`field.js onClick called BUG!!!!`)
             this.onItemClick && this.onItemClick('bug')
         }
     }
