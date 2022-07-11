@@ -2,21 +2,31 @@
 
 import PopUp from './popup.js';
 import Field from './field.js';
+import Game from './gamejoe.js';
 import * as sound from './sound.js';
 
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
 const GAME_DURATION_SEC = 5;
 
-const gameBtn = document.querySelector('.game__button');
-const gameTimer = document.querySelector('.game__timer');
-const gameScore = document.querySelector('.game__score');
+// const gameBtn = document.querySelector('.game__button');
+// const gameTimer = document.querySelector('.game__timer');
+// const gameScore = document.querySelector('.game__score');
 
 
 
 let started = false;
 let score = 0;
 let timer = undefined;
+
+const mainGame = new Game();
+mainGame.setClickListener(() => {
+    if(started) {
+        stopGame();
+    } else {
+        startGame();
+    }
+})
 
 const gameFinishBanner = new PopUp();
 gameFinishBanner.setClickListener(() => {
@@ -54,13 +64,13 @@ function onItemClick(item) {
 
 // field.addEventListener('click', onFieldClick);
 
-gameBtn.addEventListener('click', ()=> {
-    if(started) {
-        stopGame();
-    } else {
-        startGame();
-    }
-});
+// gameBtn.addEventListener('click', ()=> {
+//     if(started) {
+//         stopGame();
+//     } else {
+//         startGame();
+//     }
+// });
 
 // popUpRefresh.addEventListener('click', () => {
 //     startGame();
@@ -125,24 +135,30 @@ function startGameTimer() {
 function updateTimerText(time) {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    gameTimer.innerText = `${minutes}:${seconds}`;
+    mainGame.gameTimer.innerHTML = `${minutes}:${seconds}`;
+    // gameTimer.innerText = `${minutes}:${seconds}`;
 }
 
 function showTimerAndScore() {
-    gameTimer.style.visibility = 'visible';
-    gameScore.style.visibility = 'visible';
+    mainGame.gameTimer.style.visibility = 'visible';
+    mainGame.gameScore.style.visibility = 'visible';
+    // gameTimer.style.visibility = 'visible';
+    // gameScore.style.visibility = 'visible';
 }
 
 function showStopButton() {
-    const icon = gameBtn.querySelector('.fa-solid');
+    const icon = mainGame.gameBtn.querySelector('.fa-solid');
+    // const icon = gameBtn.querySelector('.fa-solid');
     console.log(icon)
     icon.classList.add('fa-stop');
     icon.classList.remove('fa-play');
-    gameBtn.style.visibility = 'visible';
+    // gameBtn.style.visibility = 'visible';
+    mainGame.gameBtn.style.visibility = 'visible';
 }
 
 function hideGamebutton() {
-    gameBtn.style.visibility = 'hidden';
+    mainGame.gameBtn.style.visibility = 'hidden';
+    // gameBtn.style.visibility = 'hidden';
 }
 
 // function showPopUpWithText(text) {
@@ -157,7 +173,8 @@ function hideGamebutton() {
 function initGame() {
     // Add bugs and carrots in field
     // field.innerHTML = '';
-    gameScore.innerHTML = CARROT_COUNT;
+    mainGame.gameScore.innerHTML = CARROT_COUNT;
+    // gameScore.innerHTML = CARROT_COUNT;
     score = 0;
     // addItem('carrot', CARROT_COUNT, 'img/carrot.png');
     // addItem('bug', BUG_COUNT, 'img/bug.png');
@@ -165,7 +182,8 @@ function initGame() {
 }
 
 function updateScoreBoard() {
-    gameScore.innerText = CARROT_COUNT - score;
+    mainGame.gameScore.innerHTML = CARROT_COUNT - score;
+    // gameScore.innerText = CARROT_COUNT - score;
 }
 
 
