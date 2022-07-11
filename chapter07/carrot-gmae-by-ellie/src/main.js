@@ -8,23 +8,24 @@ const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
 const GAME_DURATION_SEC = 5;
 
-const gameBtn = document.querySelector('.game__button');
-const gameTimer = document.querySelector('.game__timer');
-const gameScore = document.querySelector('.game__score');
+// const gameBtn = document.querySelector('.game__button');
+// const gameTimer = document.querySelector('.game__timer');
+// const gameScore = document.querySelector('.game__score');
 
 
 
-let started = false;
-let score = 0;
-let timer = undefined;
+// let started = false;
+// let score = 0;
+// let timer = undefined;
 
 const gameFinishBanner = new PopUp();
 gameFinishBanner.setClickListener(() => {
     startGame();
 })
 
-const gameField = new Field(CARROT_COUNT, BUG_COUNT);
-gameField.setClickListener(onItemClick);
+// const gameField = new Field(CARROT_COUNT, BUG_COUNT);
+// gameField.setClickListener(onItemClick);
+
 function onItemClick(item) {
     console.log(`main.js onItemClick called, item = ${item}`)
     if (!started) {
